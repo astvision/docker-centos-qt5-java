@@ -6,7 +6,7 @@ RUN yum install -y         \
         mlocate            \
         openssl-devel      \
         qt5-qtbase-devel   \
-        qtscript5-dev      \
+        qt5-qtscript       \
         java-1.8.0-openjdk
 
 CMD /bin/bash && tail -f /dev/null
