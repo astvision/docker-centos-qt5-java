@@ -6,8 +6,9 @@ RUN yum install -y               \
         mlocate                  \
         openssl-devel            \
         qt5-qtbase-devel         \
-        qt5-qtscript             \
-        java-1.8.0-openjdk-devel
+        qt5-qtscript
+
+RUN yum install -y java-17-openjdk-devel
 
 # change timezone
 RUN rm /etc/localtime
