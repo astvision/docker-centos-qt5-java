@@ -8,7 +8,7 @@ RUN yum install -y               \
         qt5-qtbase-devel         \
         qt5-qtscript
 
-RUN yum install -y java-17-openjdk-devel
+RUN yum install -y java-1.8-openjdk-devel
 
 # change timezone
 RUN rm /etc/localtime
