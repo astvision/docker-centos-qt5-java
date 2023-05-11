@@ -4,13 +4,13 @@ RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
 RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
 RUN yum update -y
 
-RUN yum group install -y "Development Tools"
+RUN yum group install -y "Development Tools" --exclude=java*,jna*
 RUN yum install -y               \
         mlocate                  \
         openssl-devel            \
         qt5-qtbase-devel         \
         qt5-qtscript
-RUN yum remove -y java*
+# RUN yum remove -y java*
 RUN yum install -y java-17-openjdk-devel
 
 # change timezone
