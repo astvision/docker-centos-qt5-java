@@ -1,17 +1,21 @@
-FROM centos:8
+FROM centos:7
 
-RUN sed -i 's/mirrorlist/#mirrorlist/g' /etc/yum.repos.d/CentOS-*
-RUN sed -i 's|#baseurl=http://mirror.centos.org|baseurl=http://vault.centos.org|g' /etc/yum.repos.d/CentOS-*
 RUN yum update -y
-
 RUN yum group install -y "Development Tools" --exclude=java*,jna*
 RUN yum install -y               \
+        wget                     \
         mlocate                  \
         openssl-devel            \
         qt5-qtbase-devel         \
         qt5-qtscript
-# RUN yum remove -y java*
-RUN yum install -y java-17-openjdk-devel
+
+# install jdk-17
+RUN wget https://download.java.net/java/GA/jdk17.0.2/dfd4a8d0985749f896bed50d7138ee7f/8/GPL/openjdk-17.0.2_linux-x64_bin.tar.gz
+RUN tar xvf openjdk-17.0.2_linux-x64_bin.tar.gz
+RUN mv jdk-17.0.2/ /opt/jdk-17/
+RUN rm openjdk-17.0.2_linux-x64_bin.tar.gz
+RUN echo -e 'export JAVA_HOME=/opt/jdk-17\nexport PATH=$PATH:$JAVA_HOME/bin' >> /etc/profile
+#RUN sed -i '$ a export JAVA_HOME=/opt/jdk-17\nexport PATH=$PATH:$JAVA_HOME/bin' /etc/profile
 
 # change timezone
 RUN rm /etc/localtime
